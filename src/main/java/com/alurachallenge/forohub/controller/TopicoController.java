@@ -1,6 +1,6 @@
 package com.alurachallenge.forohub.controller;
 
-import com.alurachallenge.forohub.domain.*;
+import com.alurachallenge.forohub.domain.topico.*;
 import com.alurachallenge.forohub.infra.errores.RecursoNoEncontrado;
 import com.alurachallenge.forohub.infra.errores.ValidacionDeIntegridad;
 import jakarta.validation.Valid;
@@ -39,7 +39,7 @@ public class TopicoController {
     public ResponseEntity<Page<DatosRespuestaTopico>> listarTopicos(
             @RequestParam(required = false) String curso,
             @PageableDefault(size = 10, sort = "fechaCreacion") Pageable paginacion) {
-        var page = topicoRepository.listar(curso, paginacion);
+        var page = topicoRepository.listar(curso, paginacion);  // Usa el método listar que ya existe
         return ResponseEntity.ok(page);
     }
 
@@ -70,6 +70,8 @@ public class TopicoController {
                 .orElseThrow(() -> new RecursoNoEncontrado("Tópico no encontrado"));
 
         topico.desactivar();
+        System.out.println("Valor de activo antes de guardar: " + topico.getActivo());
+        topicoRepository.save(topico);
 
         return ResponseEntity.noContent().build();
     }

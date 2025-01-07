@@ -1,17 +1,15 @@
-package com.alurachallenge.forohub.domain;
+package com.alurachallenge.forohub.domain.topico;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Table(name = "topicos")
 @Entity(name = "Topico")
 @Getter
-@NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class Topico {
@@ -21,10 +19,17 @@ public class Topico {
     private String titulo;
     private String mensaje;
     private LocalDateTime fechaCreacion;
+    @Enumerated(EnumType.STRING)
     private StatusTopico status;
     private String autor;
     private String curso;
+    @Column(name = "activo")
     private Boolean activo;
+
+    // Constructor vacío protegido requerido por JPA/Hibernate
+    protected Topico() {
+        // Constructor vacío requerido por JPA
+    }
 
     public Topico(DatosRegistroTopico datos) {
         this.activo = true;
@@ -46,10 +51,13 @@ public class Topico {
         if (datos.curso() != null) {
             this.curso = datos.curso();
         }
+        if (datos.status() != null) {
+            this.status = datos.status();
+        }
     }
 
     public void desactivar() {
-        this.activo = false;
+        this.activo = Boolean.FALSE;
     }
 
     public Long getId() {

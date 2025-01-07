@@ -1,4 +1,4 @@
-package com.alurachallenge.forohub.domain;
+package com.alurachallenge.forohub.domain.topico;
 
 public enum StatusTopico {
     NO_RESPONDIDO,
