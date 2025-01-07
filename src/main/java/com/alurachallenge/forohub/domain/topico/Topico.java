@@ -26,9 +26,8 @@ public class Topico {
     @Column(name = "activo")
     private Boolean activo;
 
-    // Constructor vacío protegido requerido por JPA/Hibernate
+
     protected Topico() {
-        // Constructor vacío requerido por JPA
     }
 
     public Topico(DatosRegistroTopico datos) {

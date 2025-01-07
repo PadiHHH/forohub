@@ -39,7 +39,7 @@ public class TopicoController {
     public ResponseEntity<Page<DatosRespuestaTopico>> listarTopicos(
             @RequestParam(required = false) String curso,
             @PageableDefault(size = 10, sort = "fechaCreacion") Pageable paginacion) {
-        var page = topicoRepository.listar(curso, paginacion);  // Usa el método listar que ya existe
+        var page = topicoRepository.listar(curso, paginacion);
         return ResponseEntity.ok(page);
     }
 
